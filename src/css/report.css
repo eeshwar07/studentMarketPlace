@@ -1,0 +1,15 @@
+.report-page-layout{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .report-page-text{
+    font-size: 1.6rem;
+    padding-bottom: 5px;
+  }
+
+  .report-box-layout{
+    width: 80%;
+    padding: 20px;
+  }

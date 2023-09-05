@@ -1,0 +1,216 @@
+/* Eeshwar Pasula-1002015876
+Satya Pradyumna Teja Nunna- 1002028665
+Pendyala Reventh Setya- 1002080403 */
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  /* min-width: 100vw; */
+}
+
+.header {
+  /* margin: 80px 0px; */
+  background-color:  black;
+}
+
+.menu{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+@media (max-width: 640px) 
+{
+    .menu
+    {
+        display: none;
+    }
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  height: 45px;
+}
+.logo-element {
+  margin: 10px auto 10px 80px;
+  color:#ed6464;
+  font-size: 20px;
+}
+.home-element {
+  margin: 10px;
+}
+.local-element {
+  margin: 10px;
+  color: #6495ed;
+}
+
+.local-element:last-child {
+  margin-right: 80px;
+}
+
+.link-element {
+  text-decoration: none;
+  color: #ed6464;
+  font-size: 20px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  margin-bottom: 30px;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: black;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+
+.columns {
+  float: left;
+  padding: 0 10px;
+  /* width: 100%;
+  width: -moz-available;          
+  width: -webkit-fill-available; 
+  width: fill-available; */
+}
+
+.rows {
+margin: 0 -5px; 
+margin-right: 10px;
+display: flex;
+flex-wrap: wrap;
+width: fit-content;
+}
+
+.sets {
+  display: flex;
+  flex-wrap: wrap;
+  direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  padding-top: 30px;
+}
+
+.div{
+border: 3px solid green;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 20%;
+margin: 10px auto;
+font-size: 50px;
+}
+
+.form{
+  border: 1px;
+}
+
+.input-button{
+  color: white;
+  padding: 10px 20px;
+  background-color:black;
+  border-radius: 10px;
+  border: 1px solid #ADD8E6;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.input-button:hover{
+  color: #5f24df;
+  background-color: rgb(255, 255, 255);
+}
+
+.paragraph-class{
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  display: table-row;
+  border: 5px solid orangered;
+}
+
+.form-div-tag{
+  padding: 10px ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-width{
+  height: 15px;
+  width: 360 px;
+  padding: 10px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.form-div{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.labels{
+  min-width: 120px;
+    text-align: end;
+    padding-right: 15px;
+}
+
+.border-class{
+  border: 5px solid #114dd6;
+  border-radius: 10px;
+}
+
+.textarea{
+  padding: 10px;
+}
+
+.logo{
+  padding: 10px;
+}
+
+.cart{
+  width: 25px;
+}
+
+.owner{
+display: flex;
+}
+
+.owner button{
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: black;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.owner button:hover {
+  opacity: 0.7;
+}
