@@ -37,15 +37,6 @@ export default function GenerateReport() {
   const [data8ProductsSold, setData8] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
 
-  function openForm() {
-    document.getElementById("myForm").style.display = "block";
-  }
-  
-  function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-  }
-
-
   const data1 = {
     labels: ["Student", "Business Owner", "School Admin", "Super Admin"],
     datasets: [
@@ -131,19 +122,8 @@ export default function GenerateReport() {
     getData8();
   }, []);
 
-  //   console.log(
-  //     data1Advertisement,
-  //     data2Product,
-  //     data3Club,
-  //     data4Student,
-  //     data5BusinessOwner,
-  //     data6SchoolAdmin,
-  //     data7SuperUser,
-  //     data8ProductsSold
-  //   );
-
   const getData1 = () => {
-    Axios.get(baseURL + `advertisement`)
+    Axios.get(baseURL + `advertisement.php`)
       .then(function (response) {
         if (response.data)
           if (response.data.length > 0) setData1(response.data);
@@ -153,7 +133,7 @@ export default function GenerateReport() {
       });
   };
   const getData2 = () => {
-    Axios.get(baseURL + `getproduct`)
+    Axios.get(baseURL + `getproduct.php`)
       .then(function (response) {
         if (response.data)
           if (response.data.length > 0) setData2(response.data);
@@ -163,7 +143,7 @@ export default function GenerateReport() {
       });
   };
   const getData3 = () => {
-    Axios.get(baseURL + `joinclub`)
+    Axios.get(baseURL + `joinclub.php`)
       .then(function (response) {
         if (response.data)
           if (response.data.length > 0) setData3(response.data);
@@ -173,7 +153,7 @@ export default function GenerateReport() {
       });
   };
   const getData4 = () => {
-    Axios.get(baseURL + `managestudents`)
+    Axios.get(baseURL + `managestudents.php`)
       .then(function (response) {
         if (response.data)
           if (response.data.length > 0) setData4(response.data);
@@ -183,7 +163,7 @@ export default function GenerateReport() {
       });
   };
   const getData5 = () => {
-    Axios.get(baseURL + `managebusinessowner`)
+    Axios.get(baseURL + `managebusinessowner.php`)
       .then(function (response) {
         if (response.data)
           if (response.data.length > 0) setData5(response.data);
@@ -193,7 +173,7 @@ export default function GenerateReport() {
       });
   };
   const getData6 = () => {
-    Axios.get(baseURL + `manageschooladmin`)
+    Axios.get(baseURL + `manageschooladmin.php`)
       .then(function (response) {
         if (response.data)
           if (response.data.length > 0) setData6(response.data);
@@ -203,7 +183,7 @@ export default function GenerateReport() {
       });
   };
   const getData7 = () => {
-    Axios.get(baseURL + `managesuperadmin`)
+    Axios.get(baseURL + `managesuperadmin.php`)
       .then(function (response) {
         if (response.data)
           if (response.data.length > 0) setData7(response.data);
@@ -213,7 +193,7 @@ export default function GenerateReport() {
       });
   };
   const getData8 = () => {
-    Axios.get(baseURL + `viewsolditems1`)
+    Axios.get(baseURL + `viewsolditems1.php`)
       .then(function (response) {
         console.log(response);
         if (response.data)
@@ -301,7 +281,7 @@ export default function GenerateReport() {
             justifyContent: "center",
           }}
         >
-        <h1>Users</h1>
+          <h1>Users</h1>
         </div>
         <div className="report-page-layout">
           <div className="report-box-layout">
@@ -319,94 +299,99 @@ export default function GenerateReport() {
               <b>Total Number of Super Admins:</b> {data7SuperUser.length}
             </div>
             <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
-            <div
-            style={{
-              width:'70%'
-            }}>
-              <Bar options={options1} data={data1} />
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  width: "70%",
+                }}
+              >
+                <Bar options={options1} data={data1} />
+              </div>
             </div>
-          </div>
           </div>
           <br></br>
 
           <div
-          className="Heading"
-          style={{
-            fontSize: "30px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-        <h1>Products</h1>
-        </div>
+            className="Heading"
+            style={{
+              fontSize: "30px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <h1>Products</h1>
+          </div>
           <div className="report-box-layout">
             <div className="report-page-text" style={{ fontSize: "20px" }}>
               <b>Total Number of Available Products:</b> {data2Product.length}
             </div>
             <div className="report-page-text" style={{ fontSize: "20px" }}>
-            <b>Total Number of Products Sold:</b> {data8ProductsSold.length}
+              <b>Total Number of Products Sold:</b> {data8ProductsSold.length}
             </div>
             <div className="report-page-text" style={{ fontSize: "20px" }}>
-            <b>Total Value of Products Sold:</b> ${totalValue.toFixed(2)}
+              <b>Total Value of Products Sold:</b> ${totalValue.toFixed(2)}
             </div>
             <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <div
-               style={{
-                width:'70%'
-              }}>
-            <Bar options={options2} data={data2} />
-            </div>
+                style={{
+                  width: "70%",
+                }}
+              >
+                <Bar options={options2} data={data2} />
+              </div>
             </div>
           </div>
           <br></br>
 
           <div
-          className="Heading"
-          style={{
-            fontSize: "30px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-        <h1>Clubs vs Advertisements</h1>
-        </div>
-          <div className="report-box-layout">
-            <div className="report-page-text" style={{ fontSize: "20px" }}>
-            <b>Total Number of Clubs:</b> {data3Club.length}
-            </div>
-            <div className="report-page-text" style={{ fontSize: "20px" }}>
-            <b>Total Number of Advertisements:</b> {data1Advertisement.length}
-            </div>
-            <div
-             style={{
+            className="Heading"
+            style={{
+              fontSize: "30px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-            }}>
-              <div
-              style={{
-                width:'70%'
-              }}>
-            <Bar options={options3} data={data3} />
+            }}
+          >
+            <h1>Clubs vs Advertisements</h1>
+          </div>
+          <div className="report-box-layout">
+            <div className="report-page-text" style={{ fontSize: "20px" }}>
+              <b>Total Number of Clubs:</b> {data3Club.length}
             </div>
+            <div className="report-page-text" style={{ fontSize: "20px" }}>
+              <b>Total Number of Advertisements:</b> {data1Advertisement.length}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  width: "70%",
+                }}
+              >
+                <Bar options={options3} data={data3} />
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <button className="open-button" onClick={() =>openForm()}>Chat</button>
       <div className="chat-popup" id="myForm">
         <form action="/action_page" className="form-container">
           <h1>Chat</h1>
@@ -418,9 +403,6 @@ export default function GenerateReport() {
 
           <button type="submit" className="btn">
             Send
-          </button>
-          <button type="button" className="btn cancel" onClick={() =>closeForm()}>
-            Close
           </button>
         </form>
       </div>

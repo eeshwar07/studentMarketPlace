@@ -6,17 +6,8 @@ import { useEffect, useState } from "react";
 import { baseURL } from "../util";
 
 export default function ManageBusinessOwner() {
-
   const [isEdit, setEdit] = useState(false);
   const [editUserData, setEditUserData] = useState({});
-
-  function openForm() {
-    document.getElementById("myForm").style.display = "block";
-  }
-  
-  function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-  }
 
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -24,9 +15,7 @@ export default function ManageBusinessOwner() {
   }, []);
 
   function getData() {
-    Axios.get(baseURL+"managebusinessowner").then(function (
-      response
-    ) {
+    Axios.get(baseURL + "managebusinessowner.php").then(function (response) {
       console.log(response.data[0]);
       // console.log(users)
       if (response.data) if (response.data.length > 0) setUsers(response.data);
@@ -39,29 +28,32 @@ export default function ManageBusinessOwner() {
     setEditUserData((values) => ({ ...values, [name]: value }));
   };
 
-  const editUser = (users) =>{
+  const editUser = (users) => {
     setEdit(true);
-    setEditUserData(users)
-    console.log(users)
-  }
+    setEditUserData(users);
+    console.log(users);
+  };
 
-  const deleteUser = (id) =>{
-    Axios.delete(baseURL+`deletebusinessowner/${id}`).then(function(response){
-      console.log(response.data)
-    if(response.data.status===0){
-      alert("Record deletion sucessful");
-    }
-    else{
-      alert("Record deletion unsucessful");
-    }
+  const deleteUser = (id) => {
+    Axios.delete(baseURL + `deletebusinessowner.php/${id}`).then(function (
+      response
+    ) {
+      console.log(response.data);
+      if (response.data.status === 0) {
+        alert("Record deletion sucessful");
+      } else {
+        alert("Record deletion unsucessful");
+      }
       getData();
     });
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.post(baseURL + `updatebusinessowner/${editUserData.id}`, editUserData).then((res) => {
-
+    Axios.post(
+      baseURL + `updatebusinessowner.php/${editUserData.id}`,
+      editUserData
+    ).then((res) => {
       if (res.data.status === 1) {
         getData();
         alert("Sucessfully changed");
@@ -75,12 +67,34 @@ export default function ManageBusinessOwner() {
   return (
     <>
       <div align="center">
-        <img className="logo" src={Uta} alt="Student clubs" width="300px" height="100px"/>
-        <img className="logo" src={Marketplace} alt="Student clubs" width="300px" height="100px"/>
-        <div><button style={{backgroundColor:'black'}}><a href="login.html" onClick={() => localStorage.removeItem("user")} style={{color:'white'}}>Logout</a></button></div>
-    </div>
-    
-    {isEdit ? (
+        <img
+          className="logo"
+          src={Uta}
+          alt="Student clubs"
+          width="300px"
+          height="100px"
+        />
+        <img
+          className="logo"
+          src={Marketplace}
+          alt="Student clubs"
+          width="300px"
+          height="100px"
+        />
+        <div>
+          <button style={{ backgroundColor: "black" }}>
+            <a
+              href="login.html"
+              onClick={() => localStorage.removeItem("user")}
+              style={{ color: "white" }}
+            >
+              Logout
+            </a>
+          </button>
+        </div>
+      </div>
+
+      {isEdit ? (
         <div
           style={{
             alignItems: "center",
@@ -135,33 +149,34 @@ export default function ManageBusinessOwner() {
             </center>
           </form>
         </div>
-      ) :(
-      <table border="2" align="center" style={{marginTop: '40px'}}>
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th colspan="2">Manage</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, key) => (
-            <tr key={key}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td><button onClick={() => deleteUser(user.id)}>Delete</button></td>
-              <td><button onClick={() => editUser(user)}>Edit</button></td>
+      ) : (
+        <table border="2" align="center" style={{ marginTop: "40px" }}>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th colspan="2">Manage</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user, key) => (
+              <tr key={key}>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  <button onClick={() => deleteUser(user.id)}>Delete</button>
+                </td>
+                <td>
+                  <button onClick={() => editUser(user)}>Edit</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
 
-      <button className="open-button" onClick={() =>openForm()}>
-        Chat
-      </button>
       <div className="chat-popup" id="myForm">
         <form action="managestudents" className="form-container">
           <h1>Chat</h1>
@@ -173,9 +188,6 @@ export default function ManageBusinessOwner() {
 
           <button type="submit" className="btn">
             Send
-          </button>
-          <button type="button" className="btn cancel" onclick={() =>closeForm()}>
-            Close
           </button>
         </form>
       </div>

@@ -1,12 +1,11 @@
-import React from 'react';
+import React from "react";
 import Cart from "../assets/images/cart.jpg";
 import { useEffect, useState } from "react";
 import Axios from "axios";
-import { baseURL } from '../util';
+import { baseURL } from "../util";
 
 export default function PastOrders() {
-
-    const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     getData();
@@ -14,11 +13,11 @@ export default function PastOrders() {
 
   const getData = () => {
     let id = localStorage.getItem("studentid");
-    Axios
-      .get(baseURL + `viewsolditems/${id}`)
+    Axios.get(baseURL + `viewsolditems.php/${id}`)
       .then(function (response) {
         console.log(response.data);
-        if (response.data) if (response.data.length > 0) setUsers(response.data);
+        if (response.data)
+          if (response.data.length > 0) setUsers(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -27,7 +26,7 @@ export default function PastOrders() {
 
   return (
     <>
-         <div
+      <div
         style={{
           backgroundColor: "green",
           fontFamily:
@@ -113,8 +112,16 @@ export default function PastOrders() {
           ))}
         </div>
       ) : (
-        <div style={{alignItems:'center',display:'flex',justifyContent:'center'}}><h1>No Previous Orders</h1></div>
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <h1>No Previous Orders</h1>
+        </div>
       )}
     </>
-  )
+  );
 }

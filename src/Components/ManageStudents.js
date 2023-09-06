@@ -10,23 +10,15 @@ export default function ManageStudents() {
   const [isEdit, setEdit] = useState(false);
   const navigate = useNavigate();
 
-  function openForm() {
-    document.getElementById("myForm").style.display = "block";
-  }
-
-  function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-  }
-
   const [users, setUsers] = useState([]);
-const [editUserData, setEditUserData] = useState({});
+  const [editUserData, setEditUserData] = useState({});
 
   useEffect(() => {
     getData();
   }, []);
 
   function getData() {
-    Axios.get(baseURL + "managestudents").then(function (response) {
+    Axios.get(baseURL + "managestudents.php").then(function (response) {
       console.log(response.data[0]);
       if (response.data) if (response.data.length > 0) setUsers(response.data);
     });
@@ -42,12 +34,12 @@ const [editUserData, setEditUserData] = useState({});
 
   const editUser = (users) => {
     setEdit(true);
-    setEditUserData(users)
-    console.log(users)
+    setEditUserData(users);
+    console.log(users);
   };
 
   const deleteUser = (id) => {
-    Axios.delete(baseURL + `deletestudent/${id}`).then(function (response) {
+    Axios.delete(baseURL + `deletestudent.php/${id}`).then(function (response) {
       console.log(response.data);
       if (response.data.status === 1) {
         alert(response.data.message);
@@ -60,8 +52,10 @@ const [editUserData, setEditUserData] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.post(baseURL + `updatestudent1/${editUserData.id}`, editUserData).then((res) => {
-
+    Axios.post(
+      baseURL + `updatestudent1.php/${editUserData.id}`,
+      editUserData
+    ).then((res) => {
       if (res.data.status === 1) {
         getData();
         alert("Sucessfully changed");
@@ -227,9 +221,6 @@ const [editUserData, setEditUserData] = useState({});
         </table>
       )}
 
-      <button className="open-button" onClick={() => openForm()}>
-        Chat
-      </button>
       <div className="chat-popup" id="myForm">
         <form action="managestudents" className="form-container">
           <h1>Chat</h1>
@@ -238,17 +229,6 @@ const [editUserData, setEditUserData] = useState({});
             <b>Message</b>
           </label>
           <textarea placeholder="Type message.." name="msg" required></textarea>
-
-          <button type="submit" className="btn">
-            Send
-          </button>
-          <button
-            type="button"
-            className="btn cancel"
-            onClick={() => closeForm()}
-          >
-            Close
-          </button>
         </form>
       </div>
     </>

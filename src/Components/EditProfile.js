@@ -2,68 +2,60 @@ import React from "react";
 import Cart from "../assets/images/cart.jpg";
 import { useEffect, useState } from "react";
 import Axios from "axios";
-import { baseURL } from '../util';
-import {useNavigate} from 'react-router-dom';
+import { baseURL } from "../util";
+import { useNavigate } from "react-router-dom";
 
 export default function EditProfile() {
-
-    const navigate = useNavigate();
-    const [input, setInput] = useState({role:1});
-
-  function openForm() {
-    document.getElementById("myForm").style.display = "block";
-  }
-
-  function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-  }
+  const navigate = useNavigate();
+  const [input, setInput] = useState({ role: 1 });
 
   const [users, setUsers] = useState({
-    name:"cfdsd"
-
-});
-useEffect(() => { getData();}, []);
+    name: "",
+  });
+  useEffect(() => {
+    getData();
+  }, []);
 
   function getData() {
-    let id=localStorage.getItem("studentid");
-    Axios.get(baseURL+`student/${id}`).then(function (
-      response
-    ) {
-    //   console.log(response.data[0]);
-      console.log(response.data[0])
-      if (response.data) if (response.data.length > 0) setUsers(response.data[0]);
-    }).catch((err)=>{
-        console.log(err)
-    });
+    let id = localStorage.getItem("studentid");
+    Axios.get(baseURL + `student.php/${id}`)
+      .then(function (response) {
+        //   console.log(response.data[0]);
+        console.log(response.data[0]);
+        if (response.data)
+          if (response.data.length > 0) setUsers(response.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  console.log(users)
+  console.log(users);
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setUsers(values => ({...values, [name] : value}));
-  }
+    setUsers((values) => ({ ...values, [name]: value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let id=localStorage.getItem("studentid");
+    let id = localStorage.getItem("studentid");
     let d = users;
     delete d.image;
-    delete d.address
-    Axios.post(baseURL+`updatestudent/${id}`,d).then((res) => {
-        // console.log(res.data);
-        
-      if(res.data.status===1){
+    delete d.address;
+    Axios.post(baseURL + `updatestudent.php/${id}`, d).then((res) => {
+      // console.log(res.data);
+
+      if (res.data.status === 1) {
         alert("Sucessfully changed");
         // setInput({});
-        navigate('/student1.html');
-      }
-      else{
+        navigate("/student1.html");
+      } else {
         alert("Change not sucessful");
       }
     });
-  }
+  };
 
-//   console.log(users[0])
+  //   console.log(users[0])
   return (
     <>
       <div
@@ -143,7 +135,7 @@ useEffect(() => { getData();}, []);
               <div>
                 <input
                   type="text"
-                    onChange={handleChange}
+                  onChange={handleChange}
                   name="name"
                   value={users.name}
                   required
@@ -162,7 +154,7 @@ useEffect(() => { getData();}, []);
               <div>
                 <input
                   type="text"
-                    onChange={handleChange}
+                  onChange={handleChange}
                   name="dob"
                   value={users.dob}
                   required
@@ -181,7 +173,7 @@ useEffect(() => { getData();}, []);
               <div>
                 <input
                   type="text"
-                    onChange={handleChange}
+                  onChange={handleChange}
                   name="email"
                   value={users.email}
                   required
@@ -201,7 +193,7 @@ useEffect(() => { getData();}, []);
                 <input
                   type="tel"
                   pattern="[0-9]{10}"
-                    onChange={handleChange}
+                  onChange={handleChange}
                   name="number"
                   value={users.number}
                   required
@@ -218,9 +210,6 @@ useEffect(() => { getData();}, []);
         </form>
       </div>
 
-      <button className="open-button" onClick={() => openForm()}>
-        Chat
-      </button>
       <div className="chat-popup" id="myForm">
         <form action="/action_page" className="form-container">
           <h1>Chat</h1>
@@ -232,13 +221,6 @@ useEffect(() => { getData();}, []);
 
           <button type="submit" className="btn">
             Send
-          </button>
-          <button
-            type="button"
-            className="btn cancel"
-            onClick={() => closeForm()}
-          >
-            Close
           </button>
         </form>
       </div>

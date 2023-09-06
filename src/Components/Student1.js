@@ -6,14 +6,6 @@ import Axios from "axios";
 import { baseURL } from "../util";
 
 export default function Student1() {
-  function openForm() {
-    document.getElementById("myForm").style.display = "block";
-  }
-
-  function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-  }
-
   const [users, setUsers] = useState([
     {
       name: "something",
@@ -168,10 +160,6 @@ export default function Student1() {
         </div>
       </div>
 
-      <button className="open-button" onClick={() => openForm()}>
-        Chat
-      </button>
-
       <div className="chat-popup" id="myForm">
         <form className="form-container">
           <h1>Chat</h1>
@@ -187,13 +175,6 @@ export default function Student1() {
             onClick={() => alert("Message sent sucessfully")}
           >
             Send
-          </button>
-          <button
-            type="button"
-            className="btn cancel"
-            onClick={() => closeForm()}
-          >
-            Close
           </button>
         </form>
       </div>

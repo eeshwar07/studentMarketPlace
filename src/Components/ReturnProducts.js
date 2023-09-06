@@ -13,7 +13,7 @@ export default function ReturnProducts() {
 
   const getData = () => {
     let id = localStorage.getItem("studentid");
-    Axios.get(baseURL + `viewsolditems/${id}`)
+    Axios.get(baseURL + `viewsolditems.php/${id}`)
       .then(function (response) {
         console.log(response.data);
         if (response.data)
@@ -26,7 +26,7 @@ export default function ReturnProducts() {
   };
 
   const returnProuct = (users) => {
-    Axios.delete(baseURL + `returnproducts/${users.id}`)
+    Axios.delete(baseURL + `returnproducts.php/${users.id}`)
       .then(function (response) {
         console.log(response.data);
         //   if (response.data) if (response.data.length > 0) setData(response.data);

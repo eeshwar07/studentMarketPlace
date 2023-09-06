@@ -15,9 +15,7 @@ export default function ManageSchoolAdmin() {
   }, []);
 
   function getData() {
-    Axios.get(baseURL+"manageschooladmin").then(function (
-      response
-    ) {
+    Axios.get(baseURL + "manageschooladmin.php").then(function (response) {
       console.log(response.data[0]);
       // console.log(users)
       if (response.data) if (response.data.length > 0) setUsers(response.data);
@@ -30,28 +28,31 @@ export default function ManageSchoolAdmin() {
     setEditUserData((values) => ({ ...values, [name]: value }));
   };
 
-  const editUser = (users) =>{
+  const editUser = (users) => {
     setEdit(true);
-    setEditUserData(users)
-  }
+    setEditUserData(users);
+  };
 
-  const deleteUser = (id) =>{
-    Axios.delete(baseURL+`deleteschooladmin/${id}`).then(function(response){
-      console.log(response.data)
-    if(response.data.status===1){
-      alert(response.data.message);
-    }
-    else{
-      alert("Record deletion unsucessful");
-    }
+  const deleteUser = (id) => {
+    Axios.delete(baseURL + `deleteschooladmin.php/${id}`).then(function (
+      response
+    ) {
+      console.log(response.data);
+      if (response.data.status === 1) {
+        alert(response.data.message);
+      } else {
+        alert("Record deletion unsucessful");
+      }
       getData();
     });
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.post(baseURL + `updateschooladmin/${editUserData.id}`, editUserData).then((res) => {
-
+    Axios.post(
+      baseURL + `updateschooladmin.php/${editUserData.id}`,
+      editUserData
+    ).then((res) => {
       if (res.data.status === 1) {
         getData();
         alert("Sucessfully changed");
@@ -80,9 +81,18 @@ export default function ManageSchoolAdmin() {
           height="100px"
         />
 
-<div><button style={{backgroundColor:'black'}}><a href="login.html" onClick={() => localStorage.removeItem("user")} style={{color:'white'}}>Logout</a></button></div>
+        <div>
+          <button style={{ backgroundColor: "black" }}>
+            <a
+              href="login.html"
+              onClick={() => localStorage.removeItem("user")}
+              style={{ color: "white" }}
+            >
+              Logout
+            </a>
+          </button>
+        </div>
       </div>
-
 
       {isEdit ? (
         <div
@@ -139,33 +149,34 @@ export default function ManageSchoolAdmin() {
             </center>
           </form>
         </div>
-      ) :(
-      <table border="2" align="center" style={{marginTop: '40px'}}>
-        <thead>
-          <tr>
-          <th>id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th colspan="2">Manage</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, key) => (
-            <tr key={key}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td><button onClick={() => deleteUser(user.id)}>Delete</button></td>
-              <td><button onClick={() => editUser(user)}>Edit</button></td>
+      ) : (
+        <table border="2" align="center" style={{ marginTop: "40px" }}>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th colspan="2">Manage</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user, key) => (
+              <tr key={key}>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  <button onClick={() => deleteUser(user.id)}>Delete</button>
+                </td>
+                <td>
+                  <button onClick={() => editUser(user)}>Edit</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
 
-      <button className="open-button" onclick="openForm()">
-        Chat
-      </button>
       <div className="chat-popup" id="myForm">
         <form action="managestudents" className="form-container">
           <h1>Chat</h1>
@@ -174,13 +185,6 @@ export default function ManageSchoolAdmin() {
             <b>Message</b>
           </label>
           <textarea placeholder="Type message.." name="msg" required></textarea>
-
-          <button type="submit" className="btn">
-            Send
-          </button>
-          <button type="button" className="btn cancel" onclick="closeForm()">
-            Close
-          </button>
         </form>
       </div>
     </>
