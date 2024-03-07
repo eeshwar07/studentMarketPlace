@@ -14,4 +14,4 @@ Welcome to the future of student life, where buying and selling, sharing, and co
 * After the installation is done, to run the project, run the command 'npm start'.
 * Open localhost:3000 on any web browser to run the project.
 
-This project is hosted on [https://flourishing-heliotrope-2a141d.netlify.app/](https://flourishing-heliotrope-2a141d.netlify.app/)
+This project is hosted on [https://stud-marketplace.netlify.app/](https://stud-marketplace.netlify.app/)
